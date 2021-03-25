@@ -19,15 +19,15 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
-	private long id_usuario;
+	private long idUsuario;
 	
 	
 	@NotNull
-	@Size(min= 2, max=20)
+	@Size(min= 2, max=50)
 	private String nome; 
 	
 	@NotNull
-	@Size(min= 8, max=30)
+	@Size(min= 8, max=50)
 	private String email; 
 	
 	@NotNull
@@ -39,11 +39,11 @@ public class Usuario {
 	private List<Postagem> postagem;
 
 	public long getId_usuario() {
-		return id_usuario;
+		return idUsuario;
 	}
 
-	public void setId_usuario(long id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setId_usuario(Long id_usuario) {
+		this.idUsuario = id_usuario;
 	}
 
 	public String getNome() {

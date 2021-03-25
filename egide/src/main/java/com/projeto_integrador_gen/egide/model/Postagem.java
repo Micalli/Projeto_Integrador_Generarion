@@ -23,22 +23,22 @@ public class Postagem {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private long id_postagem;
+	private Long idPostagem;
 	
 	@NotNull
-	@Size (min= 30, max=500)
+	@Size (min= 2, max=500)
 	private String publicacao;
 	
 	@NotNull
-	@Size (min= 30, max=500)
+	@Size (min= 2, max=500)
 	private String convite;
 	
 	@NotNull
-	@Size (min= 50, max=500)
+	@Size (min= 2, max=500)
 	private String evento;
 	
 	@NotNull
-	@Size (min= 2, max=15)
+	@Size (min= 2, max=50)
 	private String comunidade;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -46,24 +46,24 @@ public class Postagem {
 	
 
 	@ManyToOne
-	@JsonIgnoreProperties("postagem")
+	@JsonIgnoreProperties({"postagem","senha","email"})
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("postagem")
+	@JsonIgnoreProperties({"postagem","email_comercial","cnpj"})
 	private InformacoesInstituicao informacoesInstituicao;
 	
 	@ManyToOne
-	@JsonIgnoreProperties ("postagem")
+	@JsonIgnoreProperties ({"postagem","valor"})
 	private Tema tema;
 	
 
-	public long getId() {
-		return id_postagem;
+	public Long getId() {
+		return idPostagem;
 	}
 
-	public void setId(long id) {
-		this.id_postagem = id;
+	public void setId(Long id) {
+		this.idPostagem = id;
 	}
 
 	public String getPublicacao() {

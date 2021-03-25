@@ -18,7 +18,7 @@ public class Tema {
 	
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
-	private long id_tema;
+	private Long idTema;
 	
 	@NotNull
 	@Size(min= 2, max=20)
@@ -28,8 +28,8 @@ public class Tema {
 	@Size(min= 2, max=50)
 	private String visita; 
 	
-	@NotNull
-	@Size(min= 2, max=20)
+	
+	
 	private float valor;
 	
 	@OneToMany (mappedBy="tema")
@@ -38,11 +38,11 @@ public class Tema {
 
 
 	public long getId_tema() {
-		return id_tema;
+		return idTema;
 	}
 
 	public void setId_tema(long id_tema) {
-		this.id_tema = id_tema;
+		this.idTema = id_tema;
 	}
 
 	public String getDoacao() {

@@ -18,18 +18,18 @@ import com.sun.istack.NotNull;
 public class InformacoesInstituicao {
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
-	private long id_inf;
+	private Long idInf;
 	
 	@NotNull
 	@Size(min=2, max=35)
 	private String nome;
 	
 	@NotNull
-	@Size(min=5, max=25)
-	private String endereço;
+	@Size(min=2, max=50)
+	private String endereco;
 	
 	@NotNull
-	@Size(min=8, max=20)
+	@Size(min=5, max=25)
 	private String email_comercial;
 	
 	@NotNull
@@ -40,12 +40,12 @@ public class InformacoesInstituicao {
 	@JsonIgnoreProperties("informacoesInstituicao")
 	private List<Postagem> postagem;
 
-	public long getId_inf() {
-		return id_inf;
+	public Long getId_inf() {
+		return idInf;
 	}
 
-	public void setId_inf(long id_inf) {
-		this.id_inf = id_inf;
+	public void setId_inf(Long id_inf) {
+		this.idInf = id_inf;
 	}
 
 	public String getNome() {
@@ -56,12 +56,12 @@ public class InformacoesInstituicao {
 		this.nome = nome;
 	}
 
-	public String getEndereço() {
-		return endereço;
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public void setEndereco(String endereco) {
+		this.endereco=endereco;
 	}
 
 	public String getEmail_comercial() {

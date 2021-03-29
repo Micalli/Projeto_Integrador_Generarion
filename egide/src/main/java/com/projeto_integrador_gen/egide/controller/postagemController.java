@@ -31,7 +31,7 @@ public class postagemController {
 	{
 		return ResponseEntity.ok(repository.findAll());
 	}
-	
+	//Metodo de busca de uma postagem através do seu valor de id 
 	@GetMapping("/{idPostagem}")
 	public ResponseEntity<Postagem> getById(@PathVariable Long idPostagem)
 	{

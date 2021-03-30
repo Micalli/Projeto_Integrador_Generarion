@@ -23,7 +23,7 @@ import com.projeto_integrador_gen.egide.repository.postagemRepository;
 @CrossOrigin("*")
 public class postagemController {
 	
-	@Autowired
+	@Autowired  // metodo pra instanciar repositorios // 
 	private postagemRepository repository;
 	
 	@GetMapping

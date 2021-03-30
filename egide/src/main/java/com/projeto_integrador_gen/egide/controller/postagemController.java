@@ -26,7 +26,7 @@ public class postagemController {
 	@Autowired
 	private postagemRepository repository;
 	
-	@GetMapping
+	@GetMapping //Método para pegar as postagens
 	public ResponseEntity<List<Postagem>> getAll()
 	{
 		return ResponseEntity.ok(repository.findAll());

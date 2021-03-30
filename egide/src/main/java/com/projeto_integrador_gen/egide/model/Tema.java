@@ -1,19 +1,22 @@
 package com.projeto_integrador_gen.egide.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
+
 
 @Entity
-@Table(name="tema")
+@Table(name="tb_temas")
 public class Tema {
 	
 	@Id
@@ -28,21 +31,18 @@ public class Tema {
 	@Size(min= 2, max=50)
 	private String visita; 
 	
+	private Float valor;
 	
-	
-	private float valor;
-	
-	@OneToMany (mappedBy="tema")
-	@JsonIgnoreProperties("Tema")
-	private List<Postagem> postagem;
+	@OneToMany (mappedBy="temaPost")
+	@JsonIgnoreProperties({"temaPost"})
+	private List<Postagem> postagens = new ArrayList<>();
 
-
-	public long getId_tema() {
+	public Long getIdTema() {
 		return idTema;
 	}
 
-	public void setId_tema(long id_tema) {
-		this.idTema = id_tema;
+	public void setIdTema(Long idTema) {
+		this.idTema = idTema;
 	}
 
 	public String getDoacao() {
@@ -61,19 +61,21 @@ public class Tema {
 		this.visita = visita;
 	}
 
-	public float getValor() {
+	public Float getValor() {
 		return valor;
 	}
 
-	public void setValor(float valor) {
+	public void setValor(Float valor) {
 		this.valor = valor;
 	}
 
-	public List<Postagem> getPostagem() {
-		return postagem;
+	public List<Postagem> getPostagens() {
+		return postagens;
 	}
 
-	public void setPostagem(List<Postagem> postagem) {
-		this.postagem = postagem;
-	} 
+	public void setPostagens(List<Postagem> postagens) {
+		this.postagens = postagens;
+	}
+
+	
 }

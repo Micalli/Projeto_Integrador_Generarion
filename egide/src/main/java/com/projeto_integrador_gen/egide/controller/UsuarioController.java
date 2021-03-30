@@ -1,7 +1,9 @@
 package com.projeto_integrador_gen.egide.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,15 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto_integrador_gen.egide.model.Usuario;
-import com.projeto_integrador_gen.egide.repository.usuarioRepository;
+import com.projeto_integrador_gen.egide.repository.UsuarioRepository;
+import com.projeto_integrador_gen.egide.services.UsuarioServices;
 
 @RestController
 @RequestMapping("/usuario")
 @CrossOrigin("*")
-public class usuarioController {
+public class UsuarioController {
 	
 	@Autowired
-	private usuarioRepository repository;
+	private UsuarioRepository repository;
+	@Autowired
+	private UsuarioServices services;
 	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll()
@@ -47,14 +52,18 @@ public class usuarioController {
     }
 	
 	@PostMapping
-	public ResponseEntity<Usuario> post (@RequestBody Usuario usuario)
+	public ResponseEntity<Object> post (@Valid @RequestBody Usuario usuario)
 	{
-		return ResponseEntity.status(HttpStatus.CREATED)
-					.body(repository.save(usuario));
+		Optional<Usuario> usuarioCriado = repository.findUsuarioByEmail(usuario.getEmail());
+		if (usuarioCriado.isPresent()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario já existe, tente outro!");
+		} else {
+			return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
+		}
 	}
 	
 	@PutMapping
-	public ResponseEntity<Usuario> put (@RequestBody Usuario usuario)
+	public ResponseEntity<Usuario> put (@Valid @RequestBody Usuario usuario)
 	{
 		return ResponseEntity.ok(repository.save(usuario));				
 	}

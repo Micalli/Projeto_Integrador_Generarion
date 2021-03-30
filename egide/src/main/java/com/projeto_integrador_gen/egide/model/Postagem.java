@@ -2,23 +2,26 @@ package com.projeto_integrador_gen.egide.model;
 
 import java.util.Date;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
+
 
 @Entity
-@Table(name="postagem")
+@Table(name="tb_postagens")
 public class Postagem {
 	
 	@Id
@@ -44,26 +47,27 @@ public class Postagem {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date= new java.sql.Date(System.currentTimeMillis());
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_usuario_id")
+	@JsonIgnoreProperties({"idUsuario","email","senha","minhasPostagens"})
+	private Usuario usuarioPublicador;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_intituicao_id")
+	@JsonIgnoreProperties({"postagens","cnpj","email","idInf"})
+	private Instituicao instituicaoPublicadora;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_tema_id")
+	@JsonIgnoreProperties({"postagens"})
+	private Tema temaPost;
 
-	@ManyToOne
-	@JsonIgnoreProperties({"postagem","senha","email"})
-	private Usuario usuario;
-	
-	@ManyToOne
-	@JsonIgnoreProperties({"postagem","email_comercial","cnpj"})
-	private InformacoesInstituicao informacoesInstituicao;
-	
-	@ManyToOne
-	@JsonIgnoreProperties ({"postagem","valor"})
-	private Tema tema;
-	
-
-	public Long getId() {
+	public Long getIdPostagem() {
 		return idPostagem;
 	}
 
-	public void setId(Long id) {
-		this.idPostagem = id;
+	public void setIdPostagem(Long idPostagem) {
+		this.idPostagem = idPostagem;
 	}
 
 	public String getPublicacao() {
@@ -106,29 +110,29 @@ public class Postagem {
 		this.date = date;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Usuario getUsuarioPublicador() {
+		return usuarioPublicador;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioPublicador(Usuario usuarioPublicador) {
+		this.usuarioPublicador = usuarioPublicador;
 	}
 
-	public InformacoesInstituicao getInformaçoes_Instituicao() {
-		return informacoesInstituicao;
+	public Instituicao getInstituicaoPublicadora() {
+		return instituicaoPublicadora;
 	}
 
-	public void setInformaçoes_Instituicao(InformacoesInstituicao informaçoes_Instituicao) {
-		this.informacoesInstituicao = informaçoes_Instituicao;
+	public void setInstituicaoPublicadora(Instituicao instituicaoPublicadora) {
+		this.instituicaoPublicadora = instituicaoPublicadora;
 	}
 
-
-
-	public Tema getTema() {
-		return tema;
+	public Tema getTemaPost() {
+		return temaPost;
 	}
 
-	public void setTema(Tema tema) {
-		this.tema = tema;
+	public void setTemaPost(Tema temaPost) {
+		this.temaPost = temaPost;
 	}
+
+	
 }

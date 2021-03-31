@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto_integrador_gen.egide.model.Usuario;
@@ -32,18 +33,17 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServices services;
 	
-	@GetMapping
-	public ResponseEntity<List<Usuario>> getAll()
+	@GetMapping("/perfil/{perfil}")
+	public ResponseEntity<Object> retornaPerfil(@RequestParam(defaultValue = "") String nome)
 	{
-		return ResponseEntity.ok(repository.findAll());
+		Optional<Usuario> usuarioPerfil = services.visualizarPerfil(nome);
+		if(usuarioPerfil.isPresent()) {
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioPerfil.get());
+		}else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario inexistente!");
+		}
 	}
 	
-	@GetMapping("/id/{idUsuario}")
-	public ResponseEntity<Usuario> getById(@PathVariable Long idUsuario)
-	{
-		return repository.findById(idUsuario).map(resp -> ResponseEntity.ok(resp))
-			.orElse(ResponseEntity.notFound().build());
-	}
 	
 	@GetMapping("/nome/{nome}")
 	   public ResponseEntity<List<Usuario>> getByNome(@PathVariable String nome)

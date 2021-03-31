@@ -31,16 +31,28 @@ public class UsuarioServices {
 		Optional<Usuario> usuarioCadastrado = Optional.ofNullable(repository.save(novoUsuario));
 		
 		if (usuarioCadastrado.isPresent()) {
-			return usuarioCadastrado;
-			
+			return usuarioCadastrado;	
 		} else {
-			
 			return Optional.empty();
-
 		}
 	}
 	
-
+	/**
+	 * Retorna do banco uma entidade do usuario no formato Optional.
+	 * @param 	usuario tipo String
+	 * @return 	Optional com Usuario se os parametos estiverem devidamente escritos, caso contrario vasio(empty)
+	 * @since 	1.0
+	 * @author 	Egide 
+	 */
+	public Optional<Usuario> visualizarPerfil (String nome){
+		Optional<Usuario> usuarioExistente = repository.findByNome(nome);
+		
+		if(usuarioExistente.isPresent()) {
+			return usuarioExistente;
+		}else {
+			return Optional.empty();
+		}
 	
 
+	}
 }

@@ -1,6 +1,7 @@
 package com.projeto_integrador_gen.egide.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto_integrador_gen.egide.model.Instituicao;
 import com.projeto_integrador_gen.egide.repository.InstituicaoRepository;
+import com.projeto_integrador_gen.egide.services.InstituicaoServices;
 
 @RestController
 @RequestMapping("/infinstituicao")
@@ -28,6 +30,8 @@ public class InstituicaoController {
 	
 	@Autowired
 	private InstituicaoRepository repository;
+	@Autowired
+	private InstituicaoServices services;
 	
 	@GetMapping
 	public ResponseEntity<List<Instituicao>> getAll()
@@ -53,16 +57,23 @@ public class InstituicaoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Instituicao> post (@Valid @RequestBody Instituicao informacoesinstituicao)
+	public ResponseEntity<Object> post (@Valid @RequestBody Instituicao instituicao)
 	{
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(repository.save(informacoesinstituicao));
+		Optional<Instituicao> instituicaoCriada = repository.findByEmail(instituicao.getEmail());
+		if (instituicaoCriada.isPresent())
+		{
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instituicao com e-meil já cadastrado");
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(instituicao));
+			
+		}
 	}
 	
 	@PutMapping
-	public ResponseEntity<Instituicao> put (@Valid @RequestBody Instituicao informacoesinstituicao)
+	public ResponseEntity<Instituicao> put (@Valid @RequestBody Instituicao instituicao)
 	{
-		return ResponseEntity.ok(repository.save(informacoesinstituicao));
+		return ResponseEntity.ok(repository.save(instituicao));
 	}
 	
 	@DeleteMapping("/{idInf}")

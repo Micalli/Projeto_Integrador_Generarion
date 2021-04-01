@@ -33,7 +33,13 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServices services;
 	
-	@GetMapping("/perfil/{perfil}")
+	@GetMapping
+    public ResponseEntity<List<Usuario>> getAll()
+    {
+        return ResponseEntity.ok(repository.findAll());
+    }
+	
+	@GetMapping("/perfil")
 	public ResponseEntity<Object> retornaPerfil(@RequestParam(defaultValue = "") String nome)
 	{
 		Optional<Usuario> usuarioPerfil = services.visualizarPerfil(nome);
@@ -43,7 +49,6 @@ public class UsuarioController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario inexistente!");
 		}
 	}
-	
 	
 	@GetMapping("/nome/{nome}")
 	   public ResponseEntity<List<Usuario>> getByNome(@PathVariable String nome)
@@ -73,7 +78,4 @@ public class UsuarioController {
 	{
 		repository.deleteById(idUsuario);
 	}
-	
-	
-
 }

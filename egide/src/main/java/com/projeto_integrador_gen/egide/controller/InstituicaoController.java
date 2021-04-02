@@ -24,7 +24,7 @@ import com.projeto_integrador_gen.egide.repository.InstituicaoRepository;
 import com.projeto_integrador_gen.egide.services.InstituicaoServices;
 
 @RestController
-@RequestMapping("/infinstituicao")
+@RequestMapping("/instituicao")
 @CrossOrigin
 public class InstituicaoController {
 	
@@ -60,13 +60,24 @@ public class InstituicaoController {
 	public ResponseEntity<Object> post (@Valid @RequestBody Instituicao instituicao)
 	{
 		Optional<Instituicao> instituicaoCriada = repository.findByEmail(instituicao.getEmail());
+		
 		if (instituicaoCriada.isPresent())
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instituicao com e-meil já cadastrado");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instituição com e-mail já cadastrado");
+		}
+		Optional<Instituicao> instituicaoCriadaN = repository.findByNome(instituicao.getNome());
+		if(instituicaoCriadaN.isPresent())
+		{
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instituicao com nome já cadastrado");
+		}
+		Optional<Instituicao> InstituicaoCriada = repository.findByCnpj(instituicao.getCnpj());
+		if(InstituicaoCriada.isPresent())
+		{
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instituição com CNPJ já cadastrado");
 		}
 		else {
 			return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(instituicao));
-			
+			 
 		}
 	}
 	

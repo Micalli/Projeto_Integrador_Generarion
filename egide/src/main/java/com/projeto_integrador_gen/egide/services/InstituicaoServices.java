@@ -22,7 +22,7 @@ public class InstituicaoServices {
 
 	
 	/**
-	 * Registra no banco uma nova instituicao para acessar o sistema caso não exista, retornando um Optional com a Entidade
+	 * Registra no banco uma nova instituicao para acessar o sistema caso o e-mail não exista, retornando um Optional com a Entidade
 	 * @param 	novaInstituicao uma Entidade Instituicao
 	 * @return 	Optional com Instituicao se os parametos estiverem devidamente escritos, caso contrario vazio(empty)
 	 * @since 	1.0
@@ -44,8 +44,58 @@ public class InstituicaoServices {
 			return Optional.empty();
 
 		}
+		
 	}
 	
+	/**
+	 * Registra no banco uma nova instituicao para acessar o sistema caso o nome não exista, retornando um Optional com a Entidade
+	 * @param 	novaInstituicao uma Entidade Instituicao
+	 * @return 	Optional com Instituicao se os parametos estiverem devidamente escritos, caso contrario vazio(empty)
+	 * @since 	1.0
+	 * @author 	Egide 
+	 */
+	public Optional<Instituicao> cadastrarInstituicaoNome (Instituicao novaInstituicao)
+	{
+		Optional<Instituicao> instituicaoExistente = repository.findByNome(novaInstituicao.getNome());
+		if(instituicaoExistente.isPresent())
+		{
+			return Optional.empty();
+		}
+		Optional<Instituicao> instituicaoCadastrada = Optional.ofNullable(repository.save(novaInstituicao));
+		if(instituicaoCadastrada.isPresent())
+		{
+			return instituicaoCadastrada;
+		}
+		else
+		{
+			return Optional.empty();
+		}
+	}
+	
+	/**
+	 * Registra no banco uma nova instituicao para acessar o sistema caso o cnpj não exista, retornando um Optional com a Entidade
+	 * @param 	novaInstituicao uma Entidade Instituicao
+	 * @return 	Optional com Instituicao se os parametos estiverem devidamente escritos, caso contrario vazio(empty)
+	 * @since 	1.0
+	 * @author 	Egide 
+	 */
+	public Optional<Instituicao> cadastrarInstituicaoCnpj (Instituicao novaInstituicao)
+	{
+		Optional<Instituicao> instituicaoExistente = repository.findByCnpj(novaInstituicao.getCnpj());
+		if(instituicaoExistente.isPresent())
+		{
+			return Optional.empty();
+		}
+		Optional<Instituicao> instituicaoCadastrada = Optional.ofNullable(repository.save(novaInstituicao));
+		if(instituicaoCadastrada.isEmpty())
+		{
+			return instituicaoCadastrada;
+		}
+		else
+		{
+			return Optional.empty();
+		}
+	}
 
 	}
 	

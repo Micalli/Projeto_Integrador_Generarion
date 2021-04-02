@@ -17,4 +17,6 @@ public interface InstituicaoRepository extends JpaRepository<Instituicao, Long>{
 	public List<Instituicao> findAllByEnderecoContainingIgnoreCase (String endereco);
 	
 	public Optional<Instituicao> findByEmail (String email);
+	public Optional<Instituicao> findByNome  (String nome);
+	public Optional<Instituicao> findByCnpj (String cnpj);
 }

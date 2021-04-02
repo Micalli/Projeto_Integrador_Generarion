@@ -73,7 +73,4 @@ public class UsuarioController {
 	{
 		repository.deleteById(idUsuario);
 	}
-	
-	
-
 }

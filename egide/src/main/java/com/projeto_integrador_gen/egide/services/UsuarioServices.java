@@ -14,7 +14,6 @@ public class UsuarioServices {
 	@Autowired
 	private UsuarioRepository repository;
 	
-	
 	/**
 	 * Registra no banco um novo usuario para acessar o sistema caso não exista, retornando um Optional com a Entidade
 	 * @param 	novoUsuario uma Entidade Usuario
@@ -40,7 +39,7 @@ public class UsuarioServices {
 	/**
 	 * Retorna do banco uma entidade do usuario no formato Optional.
 	 * @param 	usuario tipo String
-	 * @return 	Optional com Usuario se os parametos estiverem devidamente escritos, caso contrario vasio(empty)
+	 * @return 	Optional com Usuario se os parametos estiverem devidamente escritos, caso contrario vazio(empty)
 	 * @since 	1.0
 	 * @author 	Egide 
 	 */
@@ -52,7 +51,5 @@ public class UsuarioServices {
 		}else {
 			return Optional.empty();
 		}
-	
-
 	}
 }

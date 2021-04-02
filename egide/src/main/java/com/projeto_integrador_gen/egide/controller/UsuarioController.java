@@ -33,12 +33,6 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServices services;
 	
-	@GetMapping
-	public ResponseEntity<List<Usuario>> getAll()
-	{
-		return ResponseEntity.ok(repository.findAll());
-	}
-	
 	@GetMapping("/perfil")
 	public ResponseEntity<Object> retornaPerfil(@RequestParam(defaultValue = "") String nome)
 	{

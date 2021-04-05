@@ -25,45 +25,39 @@ import com.projeto_integrador_gen.egide.repository.TemaRepository;
 @RequestMapping("/tema")
 @CrossOrigin("*")
 public class TemaController {
-	
+
 	@Autowired
 	private TemaRepository repository;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Tema>> getAll()
-	{
+	public ResponseEntity<List<Tema>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
-	
-	
+
+	@GetMapping("/descricao")
+	public ResponseEntity<List<Tema>> GetByDescricao(@PathVariable String descricao) {
+		return ResponseEntity.ok(repository.findAllByDescricaoContaining(descricao));
+	}
+
 	@GetMapping("/{idTema}")
-	public ResponseEntity<Tema> getById(@PathVariable Long idTema)
-	{
+	public ResponseEntity<Tema> getById(@PathVariable Long idTema) {
 		return repository.findById(idTema).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Tema> post (@Valid @RequestBody Tema tema)
-	{
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(repository.save(tema));
+	public ResponseEntity<Tema> post(@Valid @RequestBody Tema tema) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<Tema> put (@Valid @RequestBody Tema tema)
-	{
+	public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema) {
 		return ResponseEntity.ok(repository.save(tema));
 	}
-	
+
 	@DeleteMapping("/{idTema}")
-	public void delete (@PathVariable Long idTema)
-	{
+	public void delete(@PathVariable Long idTema) {
 		repository.deleteById(idTema);
 	}
-	
-	
-	
-	
 
 }

@@ -21,45 +21,41 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-@Table(name="tb_postagens")
+@Table(name = "tb_postagens")
 public class Postagem {
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPostagem;
-	
+
 	@NotNull
-	@Size (min= 2, max=500)
+	@Size(min = 2, max = 500)
 	private String publicacao;
-	
+
 	@NotNull
-	@Size (min= 2, max=500)
-	private String convite;
-	
-	@NotNull
-	@Size (min= 2, max=500)
+	@Size(min = 2, max = 500)
 	private String evento;
-	
+
 	@NotNull
-	@Size (min= 2, max=50)
+	@Size(min = 2, max = 50)
 	private String comunidade;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date date= new java.sql.Date(System.currentTimeMillis());
-	
+	private Date date = new java.sql.Date(System.currentTimeMillis());
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_usuario_id")
-	@JsonIgnoreProperties({"idUsuario","email","senha","minhasPostagens"})
+	@JsonIgnoreProperties({ "idUsuario", "email", "senha", "minhasPostagens" })
 	private Usuario usuarioPublicador;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_intituicao_id")
-	@JsonIgnoreProperties({"postagens","cnpj","email","idInf"})
+	@JsonIgnoreProperties({ "postagens", "cnpj", "email", "idInf" })
 	private Instituicao instituicaoPublicadora;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_tema_id")
-	@JsonIgnoreProperties({"postagens"})
+	@JsonIgnoreProperties({ "postagens" })
 	private Tema temaPost;
 
 	public Long getIdPostagem() {
@@ -76,14 +72,6 @@ public class Postagem {
 
 	public void setPublicacao(String publicacao) {
 		this.publicacao = publicacao;
-	}
-
-	public String getConvite() {
-		return convite;
-	}
-
-	public void setConvite(String convite) {
-		this.convite = convite;
 	}
 
 	public String getEvento() {
@@ -134,5 +122,4 @@ public class Postagem {
 		this.temaPost = temaPost;
 	}
 
-	
 }

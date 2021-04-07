@@ -1,79 +1,58 @@
 package com.projeto_integrador_gen.egide.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
+
 
 @Entity
-@Table(name="tema")
+@Table(name = "tb_temas")
 public class Tema {
-	
+
 	@Id
-	@GeneratedValue (strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idTema;
-	
-	@NotNull
-	@Size(min= 2, max=20)
-	private String doacao; 
-	
-	@NotNull
-	@Size(min= 2, max=50)
-	private String visita; 
-	
-	
-	
-	private float valor;
-	
-	@OneToMany (mappedBy="tema")
-	@JsonIgnoreProperties("Tema")
-	private List<Postagem> postagem;
 
+	@NotNull
+	@Size(min = 5, max = 15)
+	private String descricao;
 
-	public long getId_tema() {
+	@OneToMany(mappedBy = "temaPost")
+	@JsonIgnoreProperties({ "temaPost" })
+	private List<Postagem> postagens = new ArrayList<>();
+
+	public Long getIdTema() {
 		return idTema;
 	}
 
-	public void setId_tema(long id_tema) {
-		this.idTema = id_tema;
+	public void setIdTema(Long idTema) {
+		this.idTema = idTema;
 	}
 
-	public String getDoacao() {
-		return doacao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDoacao(String doacao) {
-		this.doacao = doacao;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getVisita() {
-		return visita;
+	public List<Postagem> getPostagens() {
+		return postagens;
 	}
 
-	public void setVisita(String visita) {
-		this.visita = visita;
+	public void setPostagens(List<Postagem> postagens) {
+		this.postagens = postagens;
 	}
 
-	public float getValor() {
-		return valor;
-	}
-
-	public void setValor(float valor) {
-		this.valor = valor;
-	}
-
-	public List<Postagem> getPostagem() {
-		return postagem;
-	}
-
-	public void setPostagem(List<Postagem> postagem) {
-		this.postagem = postagem;
-	} 
 }

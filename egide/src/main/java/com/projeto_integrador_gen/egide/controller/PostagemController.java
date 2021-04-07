@@ -2,6 +2,8 @@ package com.projeto_integrador_gen.egide.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,22 +18,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto_integrador_gen.egide.model.Postagem;
-import com.projeto_integrador_gen.egide.repository.postagemRepository;
+import com.projeto_integrador_gen.egide.repository.PostagemRepository;
 
 @RestController
-@RequestMapping ("/postagem")
-@CrossOrigin("*")
-public class postagemController {
+@RequestMapping ("/postagem") //método de mapeamento da postagem
+@CrossOrigin("*")            //compativel com todas ides
+public class PostagemController {
 	
-	@Autowired
-	private postagemRepository repository;
+	@Autowired  // metodo pra instanciar repositorios // 
+	private PostagemRepository repository;
 	
-	@GetMapping
+	@GetMapping //Método para pegar as postagens
 	public ResponseEntity<List<Postagem>> getAll()
 	{
 		return ResponseEntity.ok(repository.findAll());
 	}
-	
+	//Metodo de busca de uma postagem através do seu valor de id 
 	@GetMapping("/{idPostagem}")
 	public ResponseEntity<Postagem> getById(@PathVariable Long idPostagem)
 	{
@@ -40,14 +42,14 @@ public class postagemController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Postagem> post (@RequestBody Postagem postagem)
+	public ResponseEntity<Postagem> post (@Valid @RequestBody Postagem postagem)
 	{
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(repository.save(postagem));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Postagem> put (@RequestBody Postagem postagem)	
+	public ResponseEntity<Postagem> put (@Valid @RequestBody Postagem postagem)	
 	{
 		return ResponseEntity.ok(repository.save(postagem));
 	}

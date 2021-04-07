@@ -1,26 +1,30 @@
 package com.projeto_integrador_gen.egide.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
+
 
 @Entity
-@Table(name="usuario")
+@Table(name="tb_usuarios")
 public class Usuario {
 	
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
-	private long idUsuario;
-	
+	private Long idUsuario;
 	
 	@NotNull
 	@Size(min= 2, max=50)
@@ -34,16 +38,16 @@ public class Usuario {
 	@Size(min= 6, max=10)
 	private String senha;
 	
-	@OneToMany (mappedBy = "usuario")
-	@JsonIgnoreProperties("usuario")
-	private List<Postagem> postagem;
+	@OneToMany (mappedBy = "usuarioPublicador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"usuarioPublicador"})
+	private List<Postagem> minhasPostagens = new ArrayList<>();
 
-	public long getId_usuario() {
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setId_usuario(Long id_usuario) {
-		this.idUsuario = id_usuario;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {
@@ -70,11 +74,13 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public List<Postagem> getPostagem() {
-		return postagem;
+	public List<Postagem> getMinhasPostagens() {
+		return minhasPostagens;
 	}
 
-	public void setPostagem(List<Postagem> postagem) {
-		this.postagem = postagem;
-	} 
+	public void setMinhasPostagens(List<Postagem> minhasPostagens) {
+		this.minhasPostagens = minhasPostagens;
+	}
+
+	
 }

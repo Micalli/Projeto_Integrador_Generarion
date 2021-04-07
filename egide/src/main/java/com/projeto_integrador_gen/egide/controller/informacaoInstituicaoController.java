@@ -21,7 +21,7 @@ import com.projeto_integrador_gen.egide.repository.informacoesInstituicaoReposit
 
 @RestController
 @RequestMapping("/infinstituicao")
-@CrossOrigin
+@CrossOrigin //teste
 public class informacaoInstituicaoController {
 	
 	@Autowired

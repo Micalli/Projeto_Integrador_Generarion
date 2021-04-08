@@ -38,7 +38,7 @@ public class InstituicaoController {
 	{
 		return ResponseEntity.ok(repository.findAll());
 	}
-	//teste
+	//testess
 	@GetMapping("/{idInf}")
 	public ResponseEntity<Instituicao> getById (@PathVariable Long idInf)
 	{

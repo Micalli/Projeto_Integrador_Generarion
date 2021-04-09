@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.projeto_integrador_gen.egide.model.Instituicao;
+import com.projeto_integrador_gen.egide.model.Usuario;
 
 
 @Repository
@@ -19,4 +20,8 @@ public interface InstituicaoRepository extends JpaRepository<Instituicao, Long>{
 	public Optional<Instituicao> findByEmail (String email);
 	public Optional<Instituicao> findByNome  (String nome);
 	public Optional<Instituicao> findByCnpj (String cnpj);
+	public static Optional<Instituicao> findByUsuario(String usuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

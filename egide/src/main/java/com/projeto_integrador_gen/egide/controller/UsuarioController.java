@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projeto_integrador_gen.egide.model.UserLogin;
 import com.projeto_integrador_gen.egide.model.Usuario;
 import com.projeto_integrador_gen.egide.repository.UsuarioRepository;
 import com.projeto_integrador_gen.egide.services.UsuarioServices;
@@ -51,7 +52,7 @@ public class UsuarioController {
  }
 	
 	
-	@PostMapping
+	@PostMapping("/email")
 	public ResponseEntity<Object> post (@Valid @RequestBody Usuario usuario)
 	{
 		Optional<Usuario> usuarioCriado = repository.findUsuarioByEmail(usuario.getEmail());
@@ -60,7 +61,30 @@ public class UsuarioController {
 		} else {
 			return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
 		}
+		
 	}
+	
+	//possivel erro 
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Object> postUser (@RequestBody Usuario usuario)
+	{
+		Optional<Usuario> usuarioCadastrado = services.cadastrarUsuario(usuario);
+		if (usuarioCadastrado.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body("Usuario Existente");
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCadastrado.get());
+	}
+		
+	}
+	
+	@PostMapping("/logar")
+	public ResponseEntity<UserLogin> Autentication(@RequestBody Optional<UserLogin> user)
+	{
+		return services.Logar(user).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	}
+	
 	
 	@PutMapping
 	public ResponseEntity<Usuario> put (@Valid @RequestBody Usuario usuario)

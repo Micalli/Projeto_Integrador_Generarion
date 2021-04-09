@@ -1,10 +1,14 @@
 package com.projeto_integrador_gen.egide.services;
 
+import java.nio.charset.Charset;
 import java.util.Optional;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.projeto_integrador_gen.egide.model.UserLogin;
 import com.projeto_integrador_gen.egide.model.Usuario;
 import com.projeto_integrador_gen.egide.repository.UsuarioRepository;
 
@@ -21,16 +25,16 @@ public class UsuarioServices {
 	 * @since 	1.0
 	 * @author 	Egide 
 	 */
-	public Optional<Usuario> cadastrarUsuario(Usuario novoUsuario){
+	public Optional<Usuario> cadastrarUsuarioEmail (Usuario novoUsuario){
 		Optional<Usuario> usuarioExistente = repository.findByEmail(novoUsuario.getEmail());
 		if(usuarioExistente.isPresent())
 		{
 			return Optional.empty();
 		}
-		Optional<Usuario> usuarioCadastrado = Optional.ofNullable(repository.save(novoUsuario));
+		Optional<Usuario> usuarioCad = Optional.ofNullable(repository.save(novoUsuario));
 		
-		if (usuarioCadastrado.isPresent()) {
-			return usuarioCadastrado;	
+		if (usuarioCad.isPresent()) {
+			return usuarioCad;	
 		} else {
 			return Optional.empty();
 		}
@@ -52,4 +56,45 @@ public class UsuarioServices {
 			return Optional.empty();
 		}
 	}
+	
+	public Optional <Usuario> cadastrarUsuario (Usuario usuario)
+	{
+		Optional<Usuario> usuarioExistente = repository.findByUsuario(usuario.getUsuario()); 
+		if(usuarioExistente.isPresent())
+		{
+			return Optional.empty();
+		}
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		String senhaEncoder = encoder.encode(usuario.getSenha());
+		usuario.setSenha(senhaEncoder);
+		
+		return Optional.ofNullable(repository.save(usuario));
+	}
+	
+	public Optional<UserLogin> Logar (Optional<UserLogin> user)
+	{
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		Optional<Usuario> usuario = repository.findByUsuario(user.get().getUsuario());
+		
+		if(usuario.isPresent())
+		{
+			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha()))
+			{
+				String auth = user.get().getUsuario() + ":" + user.get().getSenha();
+				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+				String authHeader ="Basic " + new String(encodedAuth);
+				
+				user.get().setToken(authHeader);
+				user.get().setNome(usuario.get().getNome());
+				
+				return user;
+			}
+		}
+		
+		return null;
+	}
+	
+	
 }

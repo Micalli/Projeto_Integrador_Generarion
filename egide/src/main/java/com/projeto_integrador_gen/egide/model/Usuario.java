@@ -27,15 +27,19 @@ public class Usuario {
 	private Long idUsuario;
 	
 	@NotNull
-	@Size(min= 2, max=50)
+	@Size(min= 2, max=100)
 	private String nome; 
 	
 	@NotNull
-	@Size(min= 8, max=50)
+	@Size(min= 2, max=100)
+	private String usuario;
+	
+	@NotNull
+	@Size(min= 8, max=100)
 	private String email; 
 	
 	@NotNull
-	@Size(min= 6, max=10)
+	@Size(min= 6, max=100)
 	private String senha;
 	
 	@OneToMany (mappedBy = "usuarioPublicador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -80,6 +84,14 @@ public class Usuario {
 
 	public void setMinhasPostagens(List<Postagem> minhasPostagens) {
 		this.minhasPostagens = minhasPostagens;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	

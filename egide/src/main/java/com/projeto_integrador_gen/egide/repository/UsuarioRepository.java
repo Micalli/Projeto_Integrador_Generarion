@@ -18,6 +18,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	public Optional<Usuario> findByNome (String nome);
 	
+	public Optional<Usuario> findByUsuario(String usuario);
+	
 	@Query(value = "SELECT * FROM tb_usuarios WHERE email = :cenourinhas",nativeQuery = true)
 	public Optional<Usuario> findUsuarioByEmail(@Param("cenourinhas")String email);
 

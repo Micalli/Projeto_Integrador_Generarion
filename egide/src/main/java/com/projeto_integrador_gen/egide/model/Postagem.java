@@ -1,10 +1,7 @@
 package com.projeto_integrador_gen.egide.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_postagens")
+//teste
 public class Postagem {
 
 	@Id
@@ -48,12 +46,9 @@ public class Postagem {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_usuario_id")
-	@JsonIgnoreProperties({ "idUsuario", "email", "senha", "minhasPostagens" })
+	@JsonIgnoreProperties({"idUsuario","email","senha","minhasPostagens"})
 	private Usuario usuarioPublicador;
-	
-	@OneToMany(mappedBy = "postComentario",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JsonIgnoreProperties
-	private List<Comentarios> comentarioPost = new ArrayList<>();
+
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_tema_id")
@@ -108,13 +103,6 @@ public class Postagem {
 		this.usuarioPublicador = usuarioPublicador;
 	}
 
-	public List<Comentarios> getComentarioPost() {
-		return comentarioPost;
-	}
-
-	public void setComentarioPost(List<Comentarios> comentarioPost) {
-		this.comentarioPost = comentarioPost;
-	}
 
 	public Tema getTemaPost() {
 		return temaPost;
@@ -123,6 +111,5 @@ public class Postagem {
 	public void setTemaPost(Tema temaPost) {
 		this.temaPost = temaPost;
 	}
-	
-	
+
 }

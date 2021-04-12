@@ -49,12 +49,6 @@ public class Postagem {
 	@JsonIgnoreProperties({"idUsuario","email","senha","minhasPostagens"})
 	private Usuario usuarioPublicador;
 
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_tema_id")
-	@JsonIgnoreProperties({ "postagens" })
-	private Tema temaPost;
-
 	public Long getIdPostagem() {
 		return idPostagem;
 	}
@@ -101,15 +95,6 @@ public class Postagem {
 
 	public void setUsuarioPublicador(Usuario usuarioPublicador) {
 		this.usuarioPublicador = usuarioPublicador;
-	}
-
-
-	public Tema getTemaPost() {
-		return temaPost;
-	}
-
-	public void setTemaPost(Tema temaPost) {
-		this.temaPost = temaPost;
 	}
 
 }

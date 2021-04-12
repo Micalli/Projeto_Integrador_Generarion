@@ -28,6 +28,14 @@ public class Instituicao {
 	private String nome;
 	
 	@NotNull
+	@Size(min=6, max=100)
+	private String senha;
+	
+	@NotNull
+	@Size(min=2, max=35)
+	private String usuario;
+	
+	@NotNull
 	@Size(min=2, max=50)
 	private String endereco;
 	
@@ -91,4 +99,21 @@ public class Instituicao {
 		this.postagens = postagens;
 	}
 
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	
 }

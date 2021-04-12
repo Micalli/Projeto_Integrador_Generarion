@@ -45,7 +45,7 @@ public class Postagem {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_usuario_id")
-	@JsonIgnoreProperties({ "idUsuario", "email", "senha", "minhasPostagens" })
+	@JsonIgnoreProperties({"idUsuario","email","senha","minhasPostagens"})
 	private Usuario usuarioPublicador;
 
 	@ManyToOne(fetch = FetchType.EAGER)

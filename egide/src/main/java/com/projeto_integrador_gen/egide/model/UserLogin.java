@@ -5,6 +5,8 @@ public class UserLogin {
 	private String nome;
 
 	private String usuario;
+	
+	private String email;
 
 	private String senha;
 
@@ -26,6 +28,14 @@ public class UserLogin {
 		this.usuario = usuario;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getSenha() {
 		return senha;
 	}
@@ -42,4 +52,5 @@ public class UserLogin {
 		this.token = token;
 	}
 
+	
 }

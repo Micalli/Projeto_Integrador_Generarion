@@ -1,4 +1,4 @@
-package com.projeto_integrador_gen.egide.model;
+	package com.projeto_integrador_gen.egide.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +61,14 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
 
 	public String getEmail() {
 		return email;
@@ -86,13 +94,4 @@ public class Usuario {
 		this.minhasPostagens = minhasPostagens;
 	}
 
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	
 }

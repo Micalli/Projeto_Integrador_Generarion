@@ -1,7 +1,10 @@
 package com.projeto_integrador_gen.egide.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,11 +50,10 @@ public class Postagem {
 	@JoinColumn(name = "fk_usuario_id")
 	@JsonIgnoreProperties({ "idUsuario", "email", "senha", "minhasPostagens" })
 	private Usuario usuarioPublicador;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_intituicao_id")
-	@JsonIgnoreProperties({ "postagens", "cnpj", "email", "idInf" })
-	private Instituicao instituicaoPublicadora;
+	
+	@OneToMany(mappedBy = "postComentario",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JsonIgnoreProperties
+	private List<Comentarios> comentarioPost = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_tema_id")
@@ -106,12 +108,12 @@ public class Postagem {
 		this.usuarioPublicador = usuarioPublicador;
 	}
 
-	public Instituicao getInstituicaoPublicadora() {
-		return instituicaoPublicadora;
+	public List<Comentarios> getComentarioPost() {
+		return comentarioPost;
 	}
 
-	public void setInstituicaoPublicadora(Instituicao instituicaoPublicadora) {
-		this.instituicaoPublicadora = instituicaoPublicadora;
+	public void setComentarioPost(List<Comentarios> comentarioPost) {
+		this.comentarioPost = comentarioPost;
 	}
 
 	public Tema getTemaPost() {
@@ -121,5 +123,6 @@ public class Postagem {
 	public void setTemaPost(Tema temaPost) {
 		this.temaPost = temaPost;
 	}
-
+	
+	
 }

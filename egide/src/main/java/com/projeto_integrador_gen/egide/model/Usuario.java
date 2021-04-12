@@ -34,6 +34,9 @@ public class Usuario {
 	@Size(min= 2, max=100)
 	private String usuario;
 	
+	@Size
+	private String tipo;
+	
 	@NotNull
 	@Size(min= 8, max=100)
 	private String email; 
@@ -92,6 +95,14 @@ public class Usuario {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	

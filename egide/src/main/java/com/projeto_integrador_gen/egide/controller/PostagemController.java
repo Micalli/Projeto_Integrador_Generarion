@@ -24,7 +24,7 @@ import com.projeto_integrador_gen.egide.repository.PostagemRepository;
 @RequestMapping ("/postagem") //método de mapeamento da postagem
 @CrossOrigin("*")            //compativel com todas ides
 public class PostagemController {
-	
+	//teste
 	@Autowired  // metodo pra instanciar repositorios // 
 	private PostagemRepository repository;
 	

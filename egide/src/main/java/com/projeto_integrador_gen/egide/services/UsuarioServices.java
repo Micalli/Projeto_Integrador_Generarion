@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.projeto_integrador_gen.egide.model.Postagem;
 import com.projeto_integrador_gen.egide.model.UserLogin;
 import com.projeto_integrador_gen.egide.model.Usuario;
+import com.projeto_integrador_gen.egide.repository.PostagemRepository;
 import com.projeto_integrador_gen.egide.repository.UsuarioRepository;
 
 @Service
@@ -17,6 +19,9 @@ public class UsuarioServices {
 	
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private PostagemRepository postagemRepository;
 	
 	/**
 	 * Registra no banco um novo usuario para acessar o sistema caso não exista, retornando um Optional com a Entidade
@@ -94,6 +99,18 @@ public class UsuarioServices {
 		}
 		
 		return null;
+	}
+	
+	public Optional<Usuario> fazerPostagem (Postagem novaPostagem, Long idUsuario){
+		Optional<Usuario> usuarioExistente = repository.findById(idUsuario);
+		if (usuarioExistente.isPresent()) {
+			novaPostagem.setUsuarioPublicador(usuarioExistente.get());
+			postagemRepository.save(novaPostagem);
+			return repository.findById(idUsuario);
+		} else {
+			return Optional.empty();
+		}
+		
 	}
 	
 	

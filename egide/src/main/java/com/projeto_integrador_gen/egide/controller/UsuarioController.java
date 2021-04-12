@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projeto_integrador_gen.egide.model.Postagem;
 import com.projeto_integrador_gen.egide.model.UserLogin;
 import com.projeto_integrador_gen.egide.model.Usuario;
 import com.projeto_integrador_gen.egide.repository.UsuarioRepository;
@@ -85,8 +86,21 @@ public class UsuarioController {
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 	
+	@PostMapping("/postar/{id_Usuario}")
+	public ResponseEntity<Object> novoPost (@Valid @RequestBody Postagem postagem, 
+			@PathVariable(value = "id_Usuario")Long idUsuario)
+	{
+		Optional<Usuario> usuarioCriado = services.fazerPostagem(postagem, idUsuario);
+		if (usuarioCriado.isPresent()) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCriado.get());
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("não criado");
+		}
+		
+	}
+			
 	
-	@PutMapping
+	@PutMapping 
 	public ResponseEntity<Usuario> put (@Valid @RequestBody Usuario usuario)
 	{
 		return ResponseEntity.ok(repository.save(usuario));				

@@ -33,23 +33,8 @@ public class SwaggerConfig {
 	}
 
 	private Contact contact() {
-		return new Contact("Angela Caperuzzo", "https://github.com/AngelaCaperuzzo",
-				"Desenvolvedora full stack Java Jr");
+		return new Contact("Angela Caperuzzo, Gabriel Aronne, Izaque Liborio, Bruno Micalli, Mariana Santos","https://github.com/AngelaCaperuzzo",
+				"Desenvolvedores full stack Java Jr");
 	}
 
-	private Contact contact2() {
-		return new Contact("Mariana Santos", "https://github.com/marianasant0s", "Desenvolvedora full stack Java Jr");
-	}
-
-	private Contact contact3() {
-		return new Contact("Bruno Micalli", "https://github.com/Micalli", "Desenvolvedor full stack Java Jr");
-	}
-
-	private Contact contact4() {
-		return new Contact("Izaque Liborio", "https://github.com/IzaqueL95", "Desenvolvedor full stack Java Jr");
-	}
-
-	private Contact contact5() {
-		return new Contact("Gabriel Aronne", "hhttps://github.com/gabrielaronne", "Desenvolvedor full stack Java Jr");
-	}
 }

@@ -40,6 +40,10 @@ public class Postagem {
 	@NotNull
 	@Size(min = 2, max = 50)
 	private String comunidade;
+	
+	@NotNull
+	@Size(min = 2, max = 50)
+	private String tema;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
@@ -96,5 +100,14 @@ public class Postagem {
 	public void setUsuarioPublicador(Usuario usuarioPublicador) {
 		this.usuarioPublicador = usuarioPublicador;
 	}
+
+	public String getTema() {
+		return tema;
+	}
+
+	public void setTema(String tema) {
+		this.tema = tema;
+	}
+	
 
 }

@@ -92,7 +92,7 @@ public class UsuarioServices {
 				String authHeader ="Basic " + new String(encodedAuth);
 				
 				user.get().setToken(authHeader);
-				user.get().setId(usuario.get().getIdUsuario()); //possivel erro//
+				user.get().setId(usuario.get().getIdUsuario()); //possivel erro //
 				user.get().setNome(usuario.get().getNome());
 				user.get().setFoto(usuario.get().getFoto());
 				user.get().setTipo(usuario.get().getTipo());

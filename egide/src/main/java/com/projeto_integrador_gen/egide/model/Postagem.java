@@ -2,7 +2,7 @@ package com.projeto_integrador_gen.egide.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -41,9 +41,6 @@ public class Postagem {
 	@Size(min = 2, max = 50)
 	private String comunidade;
 	
-	@NotNull
-	@Size(min = 2, max = 50)
-	private String tema;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
@@ -52,6 +49,10 @@ public class Postagem {
 	@JoinColumn(name = "fk_usuario_id")
 	@JsonIgnoreProperties({"idUsuario","email","senha","minhasPostagens"})
 	private Usuario usuarioPublicador;
+
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
 
 	public Long getIdPostagem() {
 		return idPostagem;
@@ -101,13 +102,14 @@ public class Postagem {
 		this.usuarioPublicador = usuarioPublicador;
 	}
 
-	public String getTema() {
+	public Tema getTema() {
 		return tema;
 	}
 
-	public void setTema(String tema) {
+	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
-	
+
+		
 
 }

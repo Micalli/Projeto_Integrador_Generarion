@@ -9,9 +9,10 @@ import com.projeto_integrador_gen.egide.model.Postagem;
 
 
 @Repository
-public interface postagemRepository extends JpaRepository<Postagem,Long>{
+public interface PostagemRepository extends JpaRepository<Postagem,Long>{
 	
 	public List<Postagem> findAllByIdPostagemContaining (Long idPostagem);
+	public List<Postagem> findAllByTemaContaining (String tema);
 
 
 }

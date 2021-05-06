@@ -52,6 +52,16 @@ public class Postagem {
 	@JoinColumn(name = "fk_usuario_id")
 	@JsonIgnoreProperties({"idUsuario","email","senha","minhasPostagens"})
 	private Usuario usuarioPublicador;
+	
+	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Long getIdPostagem() {
 		return idPostagem;

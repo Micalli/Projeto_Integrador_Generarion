@@ -42,6 +42,11 @@ public class Usuario {
 	@Size(min= 6, max=100)
 	private String senha;
 	
+	private String foto;
+	
+	@NotNull
+	private String tipo;
+	
 	@OneToMany (mappedBy = "usuarioPublicador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"usuarioPublicador"})
 	private List<Postagem> minhasPostagens = new ArrayList<>();
@@ -92,6 +97,22 @@ public class Usuario {
 
 	public void setMinhasPostagens(List<Postagem> minhasPostagens) {
 		this.minhasPostagens = minhasPostagens;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

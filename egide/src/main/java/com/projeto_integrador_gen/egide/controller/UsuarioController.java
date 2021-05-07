@@ -75,6 +75,8 @@ public class UsuarioController {
 		}
 		else {
 			return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCadastrado.get());
+			
+		
 	}
 		
 	}

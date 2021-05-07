@@ -24,7 +24,7 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
-	private Long idUsuario;
+	private Long id;
 	
 	@NotNull
 	@Size(min= 2, max=100)
@@ -44,19 +44,19 @@ public class Usuario {
 	
 	private String foto;
 	
-	@NotNull
+	
 	private String tipo;
 	
 	@OneToMany (mappedBy = "usuarioPublicador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"usuarioPublicador"})
 	private List<Postagem> minhasPostagens = new ArrayList<>();
 
-	public Long getIdUsuario() {
-		return idUsuario;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {

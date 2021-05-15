@@ -35,6 +35,7 @@ public class Postagem {
 	
 	private String foto;
 
+
 	private String link;
 	
 
@@ -131,11 +132,5 @@ public class Postagem {
 		this.link = link;
 	}
 
-	
-	
-
-	
-
-		
 
 }

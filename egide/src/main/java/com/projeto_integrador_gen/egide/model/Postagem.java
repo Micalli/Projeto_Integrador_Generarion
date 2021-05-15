@@ -32,6 +32,11 @@ public class Postagem {
 	@NotNull
 	@Size(min = 2, max = 500)
 	private String publicacao;
+	
+	private String foto;
+
+	private String link;
+	
 
 	@NotNull
 	@Size(min = 2, max = 500)
@@ -50,19 +55,9 @@ public class Postagem {
 	@JsonIgnoreProperties({"idUsuario","email","senha","minhasPostagens"})
 	private Usuario usuarioPublicador;
 	
-	
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
-	private Tema tema;
+	private  Tema tema;
 
 	public Long getIdPostagem() {
 		return idPostagem;
@@ -119,6 +114,27 @@ public class Postagem {
 	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	
+	
+
+	
 
 		
 

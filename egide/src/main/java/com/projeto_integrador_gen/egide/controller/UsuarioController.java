@@ -52,6 +52,11 @@ public class UsuarioController {
      return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
  }
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<Usuario> GetById (@PathVariable long id) {
+		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
+	}
+	
 	
 	@PostMapping("/email")
 	public ResponseEntity<Object> post (@Valid @RequestBody Usuario usuario)
